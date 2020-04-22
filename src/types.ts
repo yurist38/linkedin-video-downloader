@@ -1,7 +1,9 @@
 export enum Actions {
-  NavigationCompleted = 'navigationCompleted',
+  AddButtons = 'addButtons',
+  Download = 'download',
 }
 
 export interface Message {
   action: Actions;
+  url?: string;
 }

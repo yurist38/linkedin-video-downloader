@@ -1,15 +1,20 @@
-i.linkedin-video-downloader-btn {
+button.linkedin-video-downloader-btn {
   position: absolute;
-  background-size: 'cover';
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   top: 10px;
   left: 10px;
-  width: 30px;
-  height: 30px;
   cursor: pointer;
   opacity: 0.5;
   transition: all 0.1s linear;
 
   &:hover {
     opacity: 1;
+  }
+
+  & > img {
+    width: 30px;
+    height: 30px;
   }
 }

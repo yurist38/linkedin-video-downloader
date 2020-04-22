@@ -10,17 +10,18 @@
     "dist:bg": "parcel build src/background/index.ts -d dist/background",
     "dist": "npm run clean && npm run dist:content && npm run dist:bg && npm run cp",
     "clean": "rimraf dist",
-    "cp": "cpx \"{manifest.json,assets/**/*}\" dist",
+    "cp": "copyfiles manifest.json assets/**/* dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yuri Drabik <yurist38@mail.ru>",
   "license": "MIT",
   "devDependencies": {
     "@types/chrome": "0.0.104",
-    "cpx": "1.5.0",
+    "copyfiles": "2.2.0",
     "parcel-bundler": "1.12.4",
     "rimraf": "3.0.2",
     "sass": "1.26.3",
     "typescript": "3.8.3"
-  }
+  },
+  "dependencies": {}
 }

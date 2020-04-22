@@ -40,6 +40,7 @@
   ],
   "permissions": [
     "https://*.linkedin.com/*",
-    "webNavigation"
+    "webNavigation",
+    "downloads"
   ]
 }

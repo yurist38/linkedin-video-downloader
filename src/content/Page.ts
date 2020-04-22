@@ -11,39 +11,49 @@ class Page {
   }
 
   static createDownloadButton(): HTMLElement {
-    const button = document.createElement('i');
+    const button = document.createElement('button');
+    const img = document.createElement('img');
     button.classList.add('linkedin-video-downloader-btn');
-    button.style.backgroundImage = `url(${chrome.runtime.getURL('assets/icons/icon48.png')})`;
+    button.title = 'Download this video!'
+    img.src = chrome.runtime.getURL('assets/icons/icon48.png');
+    button.appendChild(img);
     button.addEventListener('click', Page.onClickDownload);
     return button;
   }
 
   static onClickDownload(event: Event): void {
-    const videoEl = (event.target as HTMLElement).parentElement?.getElementsByTagName('video')[0];
-    if (videoEl) {
-      Page.downloadFile(videoEl.src);
-    }
+    // const videoEl = (event.currentTarget as HTMLElement).parentElement?.getElementsByTagName('video')[0];
+    const url = (event.currentTarget as HTMLElement).dataset['videoUrl'];
+    url && chrome.runtime.sendMessage({ action: Actions.Download, url });
   }
 
-  static downloadFile(url: string): void {
-    // TODO: add downloading functionality
-  }
+  // static downloadFile(url: string): void {
+  //   const filename = `linkedin-video-${new Date().getTime()}`;
+  //   console.log('>>>>', chrome.downloads.download);
+
+  //   chrome.downloads.download({ url, filename });
+  // }
 
   public onMessage(message: Message): void {
     switch (message.action) {
-      case Actions.NavigationCompleted:
+      case Actions.AddButtons:
         this.processAllVideos();
     }
   }
 
   public processAllVideos(): void {
+    if (!(this instanceof Page)) {
+      return;
+    }
+
     const allVideoElements = document.getElementsByTagName('video');
-    Array.from(allVideoElements).forEach(el => {
-      this instanceof Page && this.processElement(el);
+    Array.from(allVideoElements).forEach((videoEl) => {
+      this.buttonElement.dataset['videoUrl'] = videoEl.src;
+      this.attachButton(videoEl);
     });
   }
 
-  public processElement(el: HTMLElement): void {
+  public attachButton(el: HTMLElement): void {
     el.parentElement?.appendChild(this.buttonElement);
   }
 }
