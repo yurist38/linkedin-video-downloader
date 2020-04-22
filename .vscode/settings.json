@@ -1,0 +1,9 @@
+{
+  "typescript.suggest.autoImports": false,
+  "javascript.suggest.autoImports": false,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ],
+  "editor.tabSize": 2
+}

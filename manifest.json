@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "LinkedIn Video Downloader",
+  "version": "0.0.1",
+  "description": "It's the simpliest way to download any video from LinkedIn website.",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "24": "assets/icons/icon24.png",
+      "32": "assets/icons/icon32.png"
+    },
+    "default_title": "LinkedIn Video Downloader"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "content/index.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "assets/icons/*.png"
+  ],
+  "permissions": [
+    "https://*.linkedin.com/*",
+    "webNavigation"
+  ]
+}

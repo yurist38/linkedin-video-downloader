@@ -1,0 +1,26 @@
+{
+  "name": "linkedin-video-downloader",
+  "version": "0.0.1",
+  "description": "Google Chrome extension for downloading videos from LinkedIn",
+  "main": "dist/index.js",
+  "scripts": {
+    "dist:content:css": "sass src/content/sass/index.scss dist/content/styles.css",
+    "dist:content:js": "parcel build src/content/index.ts -d dist/content",
+    "dist:content": "npm run dist:content:js && npm run dist:content:css",
+    "dist:bg": "parcel build src/background/index.ts -d dist/background",
+    "dist": "npm run clean && npm run dist:content && npm run dist:bg && npm run cp",
+    "clean": "rimraf dist",
+    "cp": "cpx \"{manifest.json,assets/**/*}\" dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yuri Drabik <yurist38@mail.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "0.0.104",
+    "cpx": "1.5.0",
+    "parcel-bundler": "1.12.4",
+    "rimraf": "3.0.2",
+    "sass": "1.26.3",
+    "typescript": "3.8.3"
+  }
+}
