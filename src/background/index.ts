@@ -20,6 +20,6 @@ function onMessage({ action, url }: Message): void {
 }
 
 function downloadVideo(url: string) {
-  const filename = `linkedin-video-${new Date().getTime()}`;
+  const filename = `linkedin-video-${new Date().getTime()}.mp4`;
   chrome.downloads.download({ url, filename });
 }

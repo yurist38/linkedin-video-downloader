@@ -1,60 +1,69 @@
 import { Message, Actions } from '../types';
+import debounce from 'debounce';
 
 class Page {
+  static buttonClassName = 'linkedin-video-downloader-btn';
   public buttonElement = Page.createDownloadButton();
+  public observerCallbackDebounced = debounce(() => { this.observerCallback(); }, 1000);
+  public observer = new MutationObserver(this.observerCallbackDebounced.bind(this));
 
   constructor() {
-    window.onload = this.processAllVideos;
-    chrome.runtime.onMessage.addListener((message: Message) => {
-      this.onMessage && this.onMessage(message);
+    this.observer.observe(window.document, {
+      childList: true,
+      subtree: true,
     });
+    chrome.runtime.onMessage.addListener((message: Message) => { this.onMessage(message); });
   }
+
+  public observerCallback(): void {
+    this.processAllVideos();
+  }
+
 
   static createDownloadButton(): HTMLElement {
     const button = document.createElement('button');
     const img = document.createElement('img');
-    button.classList.add('linkedin-video-downloader-btn');
+    button.classList.add(Page.buttonClassName);
     button.title = 'Download this video!'
     img.src = chrome.runtime.getURL('assets/icons/icon48.png');
     button.appendChild(img);
-    button.addEventListener('click', Page.onClickDownload);
     return button;
   }
 
   static onClickDownload(event: Event): void {
-    // const videoEl = (event.currentTarget as HTMLElement).parentElement?.getElementsByTagName('video')[0];
     const url = (event.currentTarget as HTMLElement).dataset['videoUrl'];
     url && chrome.runtime.sendMessage({ action: Actions.Download, url });
   }
 
-  // static downloadFile(url: string): void {
-  //   const filename = `linkedin-video-${new Date().getTime()}`;
-  //   console.log('>>>>', chrome.downloads.download);
+  static isButtonAttached(videoEl: HTMLElement): boolean {
+    return !!videoEl.parentElement
+      ?.getElementsByClassName(Page.buttonClassName)
+      .length;
+  }
 
-  //   chrome.downloads.download({ url, filename });
-  // }
+  public processAllVideos(): void {
+    const allVideoElements = document.getElementsByTagName('video');
+
+    Array.from(allVideoElements).forEach((videoEl) => {
+      if (Page.isButtonAttached(videoEl)) {
+        return;
+      }
+      this.attachButton(videoEl);
+    });
+  }
+
+  public attachButton(videoEl: HTMLVideoElement): void {
+    const button = this.buttonElement.cloneNode(true) as HTMLElement;
+    button.dataset['videoUrl'] = videoEl.src;
+    button.addEventListener('click', Page.onClickDownload);
+    videoEl.parentElement?.appendChild(button);
+  }
 
   public onMessage(message: Message): void {
     switch (message.action) {
       case Actions.AddButtons:
         this.processAllVideos();
     }
-  }
-
-  public processAllVideos(): void {
-    if (!(this instanceof Page)) {
-      return;
-    }
-
-    const allVideoElements = document.getElementsByTagName('video');
-    Array.from(allVideoElements).forEach((videoEl) => {
-      this.buttonElement.dataset['videoUrl'] = videoEl.src;
-      this.attachButton(videoEl);
-    });
-  }
-
-  public attachButton(el: HTMLElement): void {
-    el.parentElement?.appendChild(this.buttonElement);
   }
 }
 

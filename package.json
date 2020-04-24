@@ -17,11 +17,15 @@
   "license": "MIT",
   "devDependencies": {
     "@types/chrome": "0.0.104",
+    "@types/debounce": "1.2.0",
     "copyfiles": "2.2.0",
     "parcel-bundler": "1.12.4",
     "rimraf": "3.0.2",
     "sass": "1.26.3",
     "typescript": "3.8.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "debounce": "1.2.0",
+    "ts-debounce": "2.0.1"
+  }
 }
