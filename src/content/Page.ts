@@ -1,5 +1,5 @@
 import { Message, Actions } from '../types';
-import debounce from 'debounce';
+import { debounce } from 'ts-debounce';
 
 class Page {
   static buttonClassName = 'linkedin-video-downloader-btn';
