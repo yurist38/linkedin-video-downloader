@@ -1,0 +1,26 @@
+name: Publish Extension
+
+on:
+  push:
+    branches:
+      - add-ci
+
+jobs:
+  publish:
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      NODE_ENV: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build production dist
+        run: npm run dist
+      - name: Check file
+        run: cat dist/content/index.js
