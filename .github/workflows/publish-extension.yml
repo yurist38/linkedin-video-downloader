@@ -9,6 +9,10 @@ jobs:
   publish:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      EID: ${{ secrets.EXTENSION_ID }}
+      OCI: ${{ secrets.OAUTH_CLIENT_ID }}
+      OCS: ${{ secrets.OAUTH_CLIENT_SECRET }}
+      ORT: ${{ secrets.OAUTH_REFRESH_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -23,5 +27,5 @@ jobs:
         run: npm run dist
         env:
           NODE_ENV: production
-      - name: Check file
-        run: cat dist/content/index.js
+      - name: Publish extension to Chrome Webstore
+        run: npx chrome-webstore-upload-cli --auto-publish --source dist --extension-id $EID --client-id $OCI --client-secret $OCS --refresh-token $ORT
