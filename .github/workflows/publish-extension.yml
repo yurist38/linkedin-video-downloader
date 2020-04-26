@@ -9,7 +9,6 @@ jobs:
   publish:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-      NODE_ENV: production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -22,5 +21,7 @@ jobs:
         run: npm ci
       - name: Build production dist
         run: npm run dist
+        env:
+          NODE_ENV: production
       - name: Check file
         run: cat dist/content/index.js
