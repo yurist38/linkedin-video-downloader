@@ -3,7 +3,7 @@ name: Publish Extension
 on:
   push:
     branches:
-      - add-ci
+      - master
 
 jobs:
   publish:
@@ -29,6 +29,8 @@ jobs:
         run: git config user.name $GIT_NAME && git config user.email $GIT_EMAIL
       - name: Bump version
         run: npx standard-version
+      - name: Push version update commit
+        run: git push origin master --follow-tags
       - name: Build production dist
         run: npm run dist
         env:
