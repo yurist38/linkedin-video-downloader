@@ -23,6 +23,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "rootDir": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
