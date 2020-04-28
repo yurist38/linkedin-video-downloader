@@ -10,15 +10,26 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "webextensions": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "modules": true,
-      "jsx": true
+      "modules": true
     }
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.test.ts"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
+  "globals": {
+    "chrome": true
   },
   "rules": {
     "curly": [
@@ -31,6 +42,8 @@
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-namespace":"off",
+    "@typescript-eslint/prefer-namespace-keyword": "off",
     "@typescript-eslint/no-empty-function": [
       "error",
       {

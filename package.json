@@ -11,17 +11,29 @@
     "dev": "npm run clean && NODE_ENV=development npm run build:content && NODE_ENV=development npm run build:bg && npm run cp",
     "clean": "rimraf dist",
     "cp": "copyfiles manifest.json assets/**/* dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .ts ./src",
+    "test": "jest -c ./config/jest.config.js"
   },
   "author": "Yuri Drabik <yurist38@mail.ru>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "7.9.0",
+    "@babel/preset-env": "7.9.5",
+    "@babel/preset-typescript": "7.9.0",
+    "@bumble/jest-chrome": "0.5.1",
     "@types/chrome": "0.0.104",
+    "@types/jest": "25.2.1",
     "@types/node": "13.13.2",
+    "@typescript-eslint/eslint-plugin": "2.29.0",
+    "@typescript-eslint/parser": "2.29.0",
+    "babel-jest": "25.4.0",
     "copyfiles": "2.2.0",
+    "eslint": "6.8.0",
+    "jest": "25.4.0",
     "parcel-bundler": "1.12.4",
     "rimraf": "3.0.2",
     "sass": "1.26.3",
+    "ts-jest": "25.4.0",
     "typescript": "3.8.3"
   },
   "dependencies": {

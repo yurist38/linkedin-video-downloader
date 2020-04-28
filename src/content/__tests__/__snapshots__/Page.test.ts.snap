@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`content/Page Page.createDownloadButton returns a correct element 1`] = `
+<button
+  class="linkedin-video-downloader-btn"
+  data-video-url=""
+  title="Download this video!"
+>
+  <img
+    src="undefined"
+  />
+</button>
+`;
