@@ -1,8 +1,11 @@
 import Page from './Page';
-import * as Sentry from '@sentry/browser';
+import { init } from '@sentry/browser';
 
 if (process.env.SENTRY_DSN) {
-  Sentry.init({ dsn: process.env.SENTRY_DSN });
+  init({
+    dsn: process.env.SENTRY_DSN,
+    release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
+  });
 }
 
 new Page();

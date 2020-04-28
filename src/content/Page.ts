@@ -4,15 +4,15 @@ import { debounce } from 'ts-debounce';
 class Page {
   static buttonClassName = 'linkedin-video-downloader-btn';
   public buttonElement = Page.createDownloadButton();
-  public observerCallbackDebounced = debounce(() => { this.observerCallback(); }, 1000);
+  public observerCallbackDebounced = debounce(this.observerCallback, 1000);
   public observer = new MutationObserver(this.observerCallbackDebounced.bind(this));
 
-  constructor() {
+  public constructor() {
     this.observer.observe(window.document, {
       childList: true,
       subtree: true,
     });
-    chrome.runtime.onMessage.addListener((message: Message) => { this.onMessage(message); });
+    chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
   }
 
   public observerCallback(): void {
@@ -25,12 +25,13 @@ class Page {
     const img = document.createElement('img');
     button.classList.add(Page.buttonClassName);
     button.title = 'Download this video!'
+    button.dataset.videoUrl = '';
     img.src = chrome.runtime.getURL('assets/icons/icon48.png');
     button.appendChild(img);
     return button;
   }
 
-  static onClickDownload(event: Event): void {
+  static onClickDownload(event: MouseEvent): void {
     const url = (event.currentTarget as HTMLElement).dataset['videoUrl'];
     url && chrome.runtime.sendMessage({ action: Actions.Download, url });
   }
