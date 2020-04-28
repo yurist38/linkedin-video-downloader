@@ -2,6 +2,8 @@
   "name": "linkedin-video-downloader",
   "version": "0.0.3",
   "description": "Google Chrome extension for downloading videos from LinkedIn",
+  "author": "Yuri Drabik <yurist38@mail.ru>",
+  "license": "MIT",
   "scripts": {
     "build:content:css": "sass src/content/sass/index.scss dist/content/styles.css",
     "build:content:js": "parcel build src/content/index.ts -d dist/content",
@@ -14,8 +16,10 @@
     "lint": "eslint --ext .ts ./src",
     "test": "jest -c ./config/jest.config.js"
   },
-  "author": "Yuri Drabik <yurist38@mail.ru>",
-  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
