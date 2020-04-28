@@ -3,7 +3,7 @@ name: Publish Extension
 on:
   push:
     branches:
-      - master
+      - fix-jest-runner-ci
 
 jobs:
   publish:
@@ -27,17 +27,21 @@ jobs:
         run: npm ci
       - name: Run linter
         run: npm run lint
+      # - name: Run unit tests
+      #   run: npm t
       - name: Run unit tests
-        run: npm t
-      - name: Configure git
-        run: git config user.name $GIT_NAME && git config user.email $GIT_EMAIL
-      - name: Bump version
-        run: npx standard-version
-      - name: Push version update commit
-        run: git push origin master --follow-tags
-      - name: Build production dist
-        run: npm run dist
-        env:
-          NODE_ENV: production
-      - name: Publish extension to Chrome Webstore
-        run: npx chrome-webstore-upload-cli upload --auto-publish --source dist --extension-id $EID --client-id $OCI --client-secret $OCS --refresh-token $ORT
+        uses: stefanoeb/jest-action@1.0.2
+        with:
+          jestArgs: '-c ./config/jest.config.js'
+      # - name: Configure git
+      #   run: git config user.name $GIT_NAME && git config user.email $GIT_EMAIL
+      # - name: Bump version
+      #   run: npx standard-version
+      # - name: Push version update commit
+      #   run: git push origin master --follow-tags
+      # - name: Build production dist
+      #   run: npm run dist
+      #   env:
+      #     NODE_ENV: production
+      # - name: Publish extension to Chrome Webstore
+      #   run: npx chrome-webstore-upload-cli upload --auto-publish --source dist --extension-id $EID --client-id $OCI --client-secret $OCS --refresh-token $ORT
