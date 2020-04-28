@@ -27,12 +27,12 @@ jobs:
         run: npm ci
       - name: Run linter
         run: npm run lint
-      # - name: Run unit tests
-      #   run: npm t
       - name: Run unit tests
-        uses: stefanoeb/jest-action@1.0.2
-        with:
-          jestArgs: '-c ./config/jest.config.js'
+        run: npm t -- --ci
+    # - name: Run unit tests
+    #   uses: stefanoeb/jest-action@1.0.2
+    #   with:
+    #     jestArgs: '-c ./config/jest.config.js'
       # - name: Configure git
       #   run: git config user.name $GIT_NAME && git config user.email $GIT_EMAIL
       # - name: Bump version
