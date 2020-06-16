@@ -17,6 +17,7 @@ describe('content/index', () => {
   });
 
   it('Should create an instance of Page class', () => {
+    process.env.SENTRY_DSN = '';
     jest.isolateModules(() => {
       require('../index');
       expect(PageMocked).toHaveBeenCalledTimes(1);
@@ -24,6 +25,7 @@ describe('content/index', () => {
   });
 
   it('Should not initialize Sentry if DSN is not provided', () => {
+    process.env.SENTRY_DSN = '';
     jest.isolateModules(() => {
       require('../index');
       expect(SentryInitMocked).toHaveBeenCalledTimes(0);

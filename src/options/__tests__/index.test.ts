@@ -39,6 +39,7 @@ describe('options/index', () => {
   });
 
   it('Should not initialize Sentry if DSN is not provided', () => {
+    process.env.SENTRY_DSN = '';
     jest.isolateModules(() => {
       require('../index');
       expect(SentryInitMocked).toHaveBeenCalledTimes(0);
