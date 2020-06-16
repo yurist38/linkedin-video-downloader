@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`options/app Should render correctly 1`] = `
+<section
+  class="section"
+>
+  <div
+    class="container"
+  >
+    <div
+      class="centered"
+    >
+      <img
+        src="../../assets/icons/icon128.png"
+      />
+       
+      <h1
+        class="title"
+      >
+        LinkedIn Video Downloader
+      </h1>
+    </div>
+     
+    <div
+      class="notification info-text"
+    >
+      <p>
+        
+        Thank you for using LinkedIn Video Downloader!
+        How do you feel about it? Maybe you have an idea for improvement or want to report a bug?
+        Please consider sending us a feedback message...
+      
+      </p>
+    </div>
+     
+    <div
+      class="centered"
+    >
+      <b-button-stub
+        class="feedback-btn is-outlined"
+        data-az-l="test-value"
+        disabled="true"
+        id="feedback-btn"
+        rounded=""
+        size="is-large"
+        type="is-primary"
+      >
+        
+        Send feedback
+      
+      </b-button-stub>
+    </div>
+  </div>
+</section>
+`;

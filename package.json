@@ -5,13 +5,14 @@
   "author": "Yuri Drabik <yurist38@mail.ru>",
   "license": "MIT",
   "scripts": {
+    "dev:options": "npm run clean && parcel src/options/index.html -d dist/options",
     "build:content:css": "sass src/content/sass/index.scss dist/content/styles.css",
     "build:content:js": "parcel build src/content/index.ts -d dist/content",
     "build:content": "npm run build:content:js && npm run build:content:css",
+    "build:options": "parcel build src/options/index.html -d dist/options --public-url .",
     "build:bg": "parcel build src/background/index.ts -d dist/background",
-    "dist": "npm run clean && npm run build:content && npm run build:bg && npm run cp",
-    "dev": "npm run clean && NODE_ENV=development npm run build:content && NODE_ENV=development npm run build:bg && npm run cp",
-    "clean": "rimraf dist",
+    "dist": "npm run clean && npm run build:content && npm run build:bg && npm run build:options && npm run cp",
+    "clean": "rimraf dist && rimraf .cache",
     "cp": "copyfiles manifest.json assets/**/* dist",
     "lint": "eslint --ext .ts ./src",
     "test": "jest -c ./config/jest.config.js"
@@ -20,6 +21,9 @@
     "node": ">=12.0.0",
     "npm": ">=6.0.0"
   },
+  "browserslist": [
+    "last 10 chrome version"
+  ],
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
@@ -30,18 +34,30 @@
     "@types/node": "13.13.2",
     "@typescript-eslint/eslint-plugin": "2.29.0",
     "@typescript-eslint/parser": "2.29.0",
-    "babel-jest": "25.4.0",
+    "@vue/component-compiler-utils": "3.1.2",
+    "@vue/test-utils": "1.0.3",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "26.0.1",
     "copyfiles": "2.2.0",
     "eslint": "6.8.0",
-    "jest": "25.4.0",
+    "eslint-plugin-vue": "6.2.2",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "26.0.1",
     "parcel-bundler": "1.12.4",
     "rimraf": "3.0.2",
     "sass": "1.26.3",
     "ts-jest": "25.4.0",
-    "typescript": "3.8.3"
+    "typescript": "3.8.3",
+    "vue-jest": "3.0.5",
+    "vue-template-compiler": "2.6.11"
   },
   "dependencies": {
     "@sentry/browser": "5.15.5",
-    "ts-debounce": "2.0.1"
+    "buefy": "0.8.20",
+    "ts-debounce": "2.0.1",
+    "vue": "2.6.11",
+    "vue-class-component": "7.2.3",
+    "vue-hot-reload-api": "2.3.4",
+    "vue-property-decorator": "8.5.0"
   }
 }

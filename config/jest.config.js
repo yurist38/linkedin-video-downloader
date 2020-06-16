@@ -1,19 +1,27 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  moduleFileExtensions: ['ts', 'js'],
+  moduleFileExtensions: ['ts', 'js', 'vue'],
   rootDir: '../src',
   testMatch: [ '**/__tests__/**/*.test.ts' ],
   testPathIgnorePatterns: ['node_modules', '.cache', 'dist'],
   transformIgnorePatterns: ['node_modules/'],
   transform: {
-    '^.+\\.ts?$': 'babel-jest',
+    '^.+\\.ts$': 'babel-jest',
+    '^.*\\.vue$': 'vue-jest',
+  },
+  moduleNameMapper: {
+    '^.+\\.(css|scss|sass)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['../config/jest.setup.js'],
   globals: {
     chrome: true,
   },
   collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.{ts,vue}',
+    '!**/node_modules/**'
+  ],
   coverageThreshold: {
     global: {
       branches: 100,

@@ -36,6 +36,7 @@
       "warn",
       "all"
     ],
+    "semi":"error",
     "no-console": "warn",
     "@typescript-eslint/member-delimiter-style": "off",
     "@typescript-eslint/type-annotation-spacing": "off",

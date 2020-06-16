@@ -24,7 +24,7 @@ class Page {
     const button = document.createElement('button');
     const img = document.createElement('img');
     button.classList.add(Page.buttonClassName);
-    button.title = 'Download this video!'
+    button.title = 'Download this video!';
     button.dataset.videoUrl = '';
     img.src = chrome.runtime.getURL('assets/icons/icon48.png');
     button.appendChild(img);

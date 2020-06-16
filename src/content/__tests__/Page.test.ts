@@ -58,7 +58,7 @@ describe('content/Page', () => {
     Object.defineProperty(event, 'currentTarget', { value: instance.buttonElement });
     Page.onClickDownload(event);
     expect(chrome.runtime.sendMessage).toHaveBeenCalledTimes(1);
-    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ action: Actions.Download, url })
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ action: Actions.Download, url });
   });
 
   it('Page.isButtonAttached returns true if the element has the download button already', () => {
