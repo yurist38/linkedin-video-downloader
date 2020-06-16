@@ -1,25 +1,40 @@
+import Vue from 'vue';
 import { mocked } from 'ts-jest/utils';
-import Page from '../Page';
 import { init, configureScope, Scope } from '@sentry/browser';
+import Buefy from 'buefy';
 
-jest.mock('../Page');
 jest.mock('@sentry/browser');
+jest.mock('vue');
+jest.mock('../app.vue', () => jest.fn(() => 'app'));
 
-const PageMocked = mocked(Page, false);
+Vue.use = jest.fn();
+
 const SentryInitMocked = mocked(init, false);
 const SentryConfigureScopeMocked = mocked(configureScope, false);
 
-describe('content/index', () => {
+describe('options/index', () => {
   const dsn = 'test-value';
+
+  beforeAll(() => {
+    const appEl = document.createElement('div');
+    appEl.id = 'app';
+    document.body.appendChild(appEl);
+  });
 
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it('Should create an instance of Page class', () => {
+  it('Should create an instance of Vue', () => {
     jest.isolateModules(() => {
       require('../index');
-      expect(PageMocked).toHaveBeenCalledTimes(1);
+      expect(Vue.use).toHaveBeenCalledTimes(1);
+      expect(Vue.use).toHaveBeenCalledWith(Buefy);
+      expect(Vue).toHaveBeenCalledTimes(1);
+      const renderFn = jest.fn();
+      (Vue as unknown as jest.Mock).mock.calls[0][0].render(renderFn);
+      expect(renderFn).toHaveBeenCalledTimes(1);
+      expect(renderFn.mock.calls[0][0]()).toEqual('app');
     });
   });
 
@@ -46,7 +61,7 @@ describe('content/index', () => {
       const scope = { setTag };
       cb(scope as unknown as Scope);
       expect(setTag).toHaveBeenCalledTimes(1);
-      expect(setTag).toHaveBeenCalledWith('app', 'content');
+      expect(setTag).toHaveBeenCalledWith('app', 'options');
     });
   });
 });

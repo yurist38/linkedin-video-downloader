@@ -1,0 +1,21 @@
+@import "~bulma/sass/utilities/_all";
+
+$family-primary: "Roboto Condensed";
+$primary: #63B4D1;
+$primary-invert: findColorInvert($primary);
+$colors: (
+    "primary": ($primary, $primary-invert)
+);
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.centered {
+  text-align: center;
+}
