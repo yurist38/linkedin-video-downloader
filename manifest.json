@@ -44,7 +44,8 @@
     "https://fonts.googleapis.com/*",
     "https://w.appzi.io/*",
     "webNavigation",
-    "downloads"
+    "downloads",
+    "storage"
   ],
   "content_security_policy": "script-src 'self' https://w.appzi.io; object-src 'self'"
 }
