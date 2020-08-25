@@ -3,11 +3,34 @@ button.linkedin-video-downloader-btn {
   background-color: transparent;
   border: none;
   box-shadow: none;
-  top: 10px;
-  left: 10px;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
   cursor: pointer;
   opacity: 0.5;
-  transition: all 0.1s linear;
+  transition: all 0.167s linear;
+
+  &.top {
+    top: 10px;
+  }
+
+  &.bottom,
+  .vjs-has-started.vjs-user-inactive.vjs-playing &.bottom {
+    bottom: 10px;
+  }
+
+  .vjs-has-started &.bottom {
+    bottom: 65px;
+  }
+
+  &.left {
+    left: 15px;
+  }
+
+  &.right {
+    right: 15px;
+  }
 
   &:hover {
     opacity: 1;

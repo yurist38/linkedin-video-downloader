@@ -9,6 +9,8 @@ jobs:
   publish:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      APPZI_TOKEN: ${{ secrets.APPZI_TOKEN }}
+      APPZI_ID: ${{ secrets.APPZI_ID }}
       EID: ${{ secrets.EXTENSION_ID }}
       OCI: ${{ secrets.OAUTH_CLIENT_ID }}
       OCS: ${{ secrets.OAUTH_CLIENT_SECRET }}

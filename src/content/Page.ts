@@ -1,9 +1,10 @@
-import { Message, Actions } from '../types';
+import { Message, Actions, CommonNames } from '../types';
+import { defaultOptions } from '../constants';
 import { debounce } from 'ts-debounce';
 
 class Page {
-  static buttonClassName = 'linkedin-video-downloader-btn';
-  public buttonElement = Page.createDownloadButton();
+  public options = defaultOptions;
+  public buttonElement = this.createDownloadButton();
   public observerCallbackDebounced = debounce(this.observerCallback, 1000);
   public observer = new MutationObserver(this.observerCallbackDebounced.bind(this));
 
@@ -13,17 +14,30 @@ class Page {
       subtree: true,
     });
     chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
+    chrome.storage.local.get([CommonNames.OptionsStorageKey], (data) => {
+      if (data && data[CommonNames.OptionsStorageKey]) {
+        this.options = data[CommonNames.OptionsStorageKey];
+        this.buttonElement = this.createDownloadButton();
+      }
+    });
   }
 
   public observerCallback(): void {
     this.processAllVideos();
   }
 
+  public getButtonClasses(): string[] {
+    return [
+      CommonNames.ButtonClassName,
+      this.options.buttonPosition.horizontal,
+      this.options.buttonPosition.vertical,
+    ];
+  }
 
-  static createDownloadButton(): HTMLElement {
+  public createDownloadButton(): HTMLElement {
     const button = document.createElement('button');
     const img = document.createElement('img');
-    button.classList.add(Page.buttonClassName);
+    button.classList.add(...this.getButtonClasses());
     button.title = 'Download this video!';
     button.dataset.videoUrl = '';
     img.src = chrome.runtime.getURL('assets/icons/icon48.png');
@@ -38,7 +52,7 @@ class Page {
 
   static isButtonAttached(videoEl: HTMLElement): boolean {
     return !!videoEl.parentElement
-      ?.getElementsByClassName(Page.buttonClassName)
+      ?.getElementsByClassName(CommonNames.ButtonClassName)
       .length;
   }
 
