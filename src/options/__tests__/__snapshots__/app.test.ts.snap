@@ -21,26 +21,112 @@ exports[`options/app Should render correctly 1`] = `
       </h1>
     </div>
      
-    <div
-      class="notification info-text"
+    <b-message-stub
+      class="options"
+      title="Options"
+      type="is-primary"
     >
-      <p>
+      <div
+        class="option"
+      >
+        <div
+          class="option-title"
+        >
+          
+          Button's vertical position
         
-        Thank you for using LinkedIn Video Downloader!
-        How do you feel about it? Maybe you have an idea for improvement or want to report a bug?
-        Please consider sending us a feedback message...
+        </div>
+         
+        <div>
+          <b-radio-stub
+            name="button-position-vertical"
+            native-value="top"
+            value="top"
+          >
+            
+            Top
+          
+          </b-radio-stub>
+           
+          <b-radio-stub
+            name="button-position-vertical"
+            native-value="bottom"
+            value="top"
+          >
+            
+            Bottom
+          
+          </b-radio-stub>
+        </div>
+      </div>
+       
+      <div
+        class="option"
+      >
+        <div
+          class="option-title"
+        >
+          
+          Button's horizontal position
+        
+        </div>
+         
+        <div>
+          <b-radio-stub
+            name="button-position-horizontal"
+            native-value="left"
+            value="left"
+          >
+            
+            Left
+          
+          </b-radio-stub>
+           
+          <b-radio-stub
+            name="button-position-horizontal"
+            native-value="right"
+            value="left"
+          >
+            
+            Right
+          
+          </b-radio-stub>
+        </div>
+      </div>
+       
+      <b-button-stub
+        class="btn center"
+        disabled="true"
+        outlined=""
+        rounded=""
+        size="is-medium"
+        type="is-primary"
+      >
+        
+        Save
       
-      </p>
-    </div>
+      </b-button-stub>
+    </b-message-stub>
+     
+    <b-notification-stub
+      type="is-primary"
+    >
+      
+      Thank you for using LinkedIn Video Downloader!
+      How do you feel about it? Maybe you have an idea for improvement or want to report a bug?
+      Please consider sending us a feedback message...
+    
+    </b-notification-stub>
      
     <div
       class="centered"
     >
       <b-button-stub
-        class="feedback-btn is-outlined"
+        class="btn"
         data-az-l="test-value"
         disabled="true"
         id="feedback-btn"
+        outlined=""
         rounded=""
         size="is-large"
         type="is-primary"

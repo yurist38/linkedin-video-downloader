@@ -2,7 +2,7 @@
 
 exports[`content/Page Page.createDownloadButton returns a correct element 1`] = `
 <button
-  class="linkedin-video-downloader-btn"
+  class="linkedin-video-downloader-btn left top"
   data-video-url=""
   title="Download this video!"
 >
