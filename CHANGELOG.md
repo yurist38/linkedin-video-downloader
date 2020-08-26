@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.9 (2020-08-26)
+
+
+### Bug Fixes
+
+* unit tests and update dependencies ([#9](https://github.com/yurist38/linkedin-video-downloader/issues/9)) ([0140788](https://github.com/yurist38/linkedin-video-downloader/commit/0140788e1af5ab144aea88a18316c254a1ff6bad))
+
 ### 0.0.8 (2020-08-02)
 
 ### 0.0.7 (2020-07-20)
