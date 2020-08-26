@@ -1,8 +1,8 @@
 import { mocked } from 'ts-jest/utils';
-import { chrome } from '@bumble/jest-chrome';
+import { chrome } from 'jest-chrome';
 import { debounce } from 'ts-debounce';
 import Page from '../Page';
-import { Actions } from '../../types';
+import { Actions, CommonNames } from '../../types';
 
 jest.mock('ts-debounce');
 const debounceMocked = mocked(debounce, false).mockReturnValue(jest.fn());
@@ -12,6 +12,7 @@ describe('content/Page', () => {
 
   beforeAll(() => {
     chrome.runtime.onMessage.addListener = jest.fn();
+    chrome.storage.local.get = jest.fn();
     MutationObserver.prototype.observe = jest.fn();
   });
 
@@ -20,7 +21,7 @@ describe('content/Page', () => {
   });
 
   it('Properties and constructor are initialized properly', () => {
-    expect(Page.buttonClassName).toEqual('linkedin-video-downloader-btn');
+    instance.createDownloadButton = jest.fn();
     expect(debounceMocked).toHaveBeenCalledTimes(1);
     expect(debounceMocked.mock.calls[0][0]).toEqual(instance.observerCallback);
     expect(debounceMocked.mock.calls[0][1]).toEqual(1000);
@@ -31,6 +32,18 @@ describe('content/Page', () => {
       subtree: true,
     });
     expect(chrome.runtime.onMessage.addListener).toHaveBeenCalledTimes(1);
+    expect(chrome.storage.local.get).toHaveBeenCalledTimes(1);
+    expect(chrome.storage.local.get.mock.calls[0][0]).toEqual([CommonNames.OptionsStorageKey]);
+
+    chrome.storage.local.get.mock.calls[0][1]({});
+    expect(instance.createDownloadButton).toHaveBeenCalledTimes(0);
+
+    (instance.createDownloadButton as jest.Mock).mockReset();
+
+    chrome.storage.local.get.mock.calls[0][1]({
+      [CommonNames.OptionsStorageKey]: 'test-key'
+    });
+    expect(instance.createDownloadButton).toHaveBeenCalledTimes(1);
   });
 
   it('observerCallback triggers processing all video elements', () => {
@@ -40,7 +53,7 @@ describe('content/Page', () => {
   });
 
   it('Page.createDownloadButton returns a correct element', () => {
-    const el = Page.createDownloadButton();
+    const el = instance.createDownloadButton();
     expect(el).toMatchSnapshot();
   });
 
@@ -65,7 +78,7 @@ describe('content/Page', () => {
     const containerEl = document.createElement('div');
     const videoEl = document.createElement('video');
     const buttonEl = document.createElement('button');
-    buttonEl.classList.add(Page.buttonClassName);
+    buttonEl.classList.add(CommonNames.ButtonClassName);
     containerEl.appendChild(videoEl);
     containerEl.appendChild(buttonEl);
     expect(Page.isButtonAttached(videoEl)).toEqual(true);
@@ -93,7 +106,7 @@ describe('content/Page', () => {
     const container = document.createElement('div');
     container.appendChild(container.appendChild(video));
     instance.attachButton(video);
-    expect(container.getElementsByClassName(Page.buttonClassName)).toHaveLength(1);
+    expect(container.getElementsByClassName(CommonNames.ButtonClassName)).toHaveLength(1);
   });
 
   it('onMessage reacts on AddButtons action', () => {

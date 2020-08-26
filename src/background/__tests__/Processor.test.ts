@@ -1,4 +1,4 @@
-import { chrome } from '@bumble/jest-chrome';
+import { chrome } from 'jest-chrome';
 import Processor from '../Processor';
 import { Actions } from '../../types';
 
