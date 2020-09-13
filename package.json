@@ -13,7 +13,9 @@
     "build:bg": "parcel build src/background/index.ts -d dist/background",
     "dist": "npm run clean && npm run build:content && npm run build:bg && npm run build:options && npm run cp",
     "clean": "rimraf dist && rimraf .cache",
-    "cp": "copyfiles manifest.json assets/**/* dist",
+    "cp": "npm run cp:main && npm run cp:vendor",
+    "cp:main": "copyfiles manifest.json assets/**/* dist",
+    "cp:vendor": "copyfiles -E -f node_modules/hls.js/dist/hls.min.js* dist/assets/js/vendor",
     "lint": "eslint --ext .ts ./src",
     "test": "jest -c ./config/jest.config.js"
   },
@@ -54,6 +56,8 @@
   "dependencies": {
     "@sentry/browser": "5.15.5",
     "buefy": "0.8.20",
+    "hls.js": "0.14.10",
+    "object-scan": "13.1.6",
     "ts-debounce": "2.0.1",
     "vue": "2.6.11",
     "vue-class-component": "7.2.3",

@@ -22,7 +22,8 @@
         "https://*.linkedin.com/*"
       ],
       "js": [
-        "content/index.js"
+        "content/index.js",
+        "assets/js/vendor/hls.min.js"
       ],
       "css": [
         "content/styles.css"
@@ -37,7 +38,7 @@
   },
   "options_page": "options/index.html",
   "web_accessible_resources": [
-    "assets/icons/*.png"
+    "assets/**/*"
   ],
   "permissions": [
     "https://*.linkedin.com/*",

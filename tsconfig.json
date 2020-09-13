@@ -21,18 +21,21 @@
     "baseUrl": "./",
     "paths": {},
     "typeRoots": [
-      "node_modules/@types"
+      "./node_modules/@types",
+      "./@types"
     ],
     "rootDir": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "downlevelIteration": true
   },
   "include": [
-    "./src/**/*"
+    "./src"
   ],
   "exclude": [
-    "node_modules"
+    "./node_modules",
+    "./@types"
   ],
   "files": [
     "./vue-shims.d.ts"
