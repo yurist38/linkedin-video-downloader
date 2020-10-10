@@ -24,6 +24,10 @@
   "browserslist": [
     "last 10 chrome version"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yurist38/linkedin-video-downloader"
+  },
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
@@ -46,7 +50,7 @@
     "parcel-bundler": "1.12.4",
     "rimraf": "3.0.2",
     "sass": "1.26.3",
-    "ts-jest": "25.4.0",
+    "ts-jest": "26.4.1",
     "typescript": "3.8.3",
     "vue-jest": "3.0.5",
     "vue-template-compiler": "2.6.11"
