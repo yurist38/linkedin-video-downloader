@@ -1,0 +1,27 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  publish:
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      APPZI_TOKEN: ${{ secrets.APPZI_TOKEN }}
+      APPZI_ID: ${{ secrets.APPZI_ID }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+      - name: Run unit tests
+        run: npm t -- --ci
