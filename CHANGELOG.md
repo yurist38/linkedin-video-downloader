@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.10 (2020-10-27)
+
+
+### Bug Fixes
+
+* add ignored errors for Sentry ([#12](https://github.com/yurist38/linkedin-video-downloader/issues/12)) ([7b8d6c5](https://github.com/yurist38/linkedin-video-downloader/commit/7b8d6c5bd4068877c28b4a0d46b7710f02a86765))
+
 ### 0.0.9 (2020-08-26)
 
 
