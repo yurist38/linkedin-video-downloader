@@ -31,6 +31,7 @@ describe('background/index', () => {
       expect(SentryInitMocked).toHaveBeenCalledWith({
         dsn,
         release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
+        ignoreErrors: [],
       });
       expect(SentryConfigureScopeMocked).toHaveBeenCalledTimes(1);
       const cb = SentryConfigureScopeMocked.mock.calls[0][0];

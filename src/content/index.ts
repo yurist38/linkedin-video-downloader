@@ -5,6 +5,11 @@ if (process.env.SENTRY_DSN) {
   init({
     dsn: process.env.SENTRY_DSN,
     release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
+    ignoreErrors: [
+      'ResizeObserver loop limit exceeded',
+      't8 is not defined',
+      'Extension context invalidated'
+    ],
   });
   configureScope((scope) => {
     scope.setTag('app', 'content');
