@@ -1,6 +1,6 @@
 # linkedin-video-downloader
 
-Google Chrome extension for downloading videos from LinkedIn
+Google Chrome extension for downloading videos from LinkedIn.
 
 It's available on [Chrome Web Store](https://chrome.google.com/webstore/detail/linkedin-video-downloader/jphfcmjmlcoecehbanbbfgonpapcnjdi)
 
@@ -22,3 +22,7 @@ Production build and deployment are done automatically via CI (GitHub Actions)
 ## Contribution
 
 If you spotted any issue or have an idea how to improve the extension feel free to open an issue.
+
+## Support project
+
+<a href="https://www.buymeacoffee.com/room_js" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
