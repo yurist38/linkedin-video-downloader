@@ -25,4 +25,4 @@ If you spotted any issue or have an idea how to improve the extension feel free 
 
 ## Support project
 
-<a href="https://www.buymeacoffee.com/room_js" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<a href="https://www.buymeacoffee.com/roomjs" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
