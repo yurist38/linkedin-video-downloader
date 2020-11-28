@@ -56,7 +56,7 @@
     "vue-template-compiler": "2.6.11"
   },
   "dependencies": {
-    "@sentry/browser": "5.15.5",
+    "@sentry/browser": "5.27.6",
     "buefy": "0.8.20",
     "ts-debounce": "2.0.1",
     "vue": "2.6.11",
