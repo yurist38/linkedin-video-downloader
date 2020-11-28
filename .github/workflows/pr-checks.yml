@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  publish:
+  checks:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       APPZI_TOKEN: ${{ secrets.APPZI_TOKEN }}
