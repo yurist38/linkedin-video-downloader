@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  publish:
+  checks:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       APPZI_TOKEN: ${{ secrets.APPZI_TOKEN }}
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: "14.x"
       - name: Install dependencies
         run: npm ci
       - name: Run linter
