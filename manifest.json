@@ -8,13 +8,14 @@
     "48": "assets/icons/icon48.png",
     "128": "assets/icons/icon128.png"
   },
-  "page_action": {
+  "browser_action": {
     "default_icon": {
       "16": "assets/icons/icon16.png",
       "24": "assets/icons/icon24.png",
       "32": "assets/icons/icon32.png"
     },
-    "default_title": "LinkedIn Video Downloader"
+    "default_title": "LinkedIn Video Downloader",
+    "default_popup": "popup/index.html"
   },
   "content_scripts": [
     {
@@ -43,9 +44,10 @@
     "https://*.linkedin.com/*",
     "https://fonts.googleapis.com/*",
     "https://w.appzi.io/*",
+    "https://cdnjs.buymeacoffee.com/*",
     "webNavigation",
     "downloads",
     "storage"
   ],
-  "content_security_policy": "script-src 'self' https://w.appzi.io; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://w.appzi.io https://cdnjs.buymeacoffee.com; object-src 'self'"
 }
