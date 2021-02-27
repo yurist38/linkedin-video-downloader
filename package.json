@@ -1,6 +1,6 @@
 {
   "name": "linkedin-video-downloader",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Google Chrome extension for downloading videos from LinkedIn",
   "author": "Yuri Drabik <yurist38@mail.ru>",
   "license": "MIT",
