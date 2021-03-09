@@ -1,4 +1,4 @@
-import { Message, Actions, CommonNames } from '../types';
+import { Message, Actions, CommonNames, Options } from '../types';
 import { defaultOptions } from '../constants';
 import { debounce } from 'ts-debounce';
 
@@ -15,10 +15,13 @@ class Page {
     });
     chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
     chrome.storage.local.get([CommonNames.OptionsStorageKey], (data) => {
-      if (data && data[CommonNames.OptionsStorageKey]) {
-        this.options = data[CommonNames.OptionsStorageKey];
-        this.buttonElement = this.createDownloadButton();
+      if (!data || !data[CommonNames.OptionsStorageKey]) {
+        return;
       }
+      Object.keys(data[CommonNames.OptionsStorageKey]).forEach((key) => {
+        this.options[key as keyof Options] = data[CommonNames.OptionsStorageKey][key];
+      });
+      this.buttonElement = this.createDownloadButton();
     });
   }
 

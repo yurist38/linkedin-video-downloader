@@ -13,6 +13,7 @@ export interface Options {
     horizontal: 'left' | 'right';
     vertical: 'top' | 'bottom';
   };
+  filename: string;
 }
 
 export enum CommonNames {
