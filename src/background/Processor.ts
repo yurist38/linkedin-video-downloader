@@ -1,4 +1,5 @@
-import { Actions, Message } from '../types';
+import { Actions, Message, CommonNames, Options } from '../types';
+import { defaultOptions } from '../constants';
 
 class Processor {
   public constructor() {
@@ -7,8 +8,11 @@ class Processor {
   }
 
   static downloadVideo(url: string) {
-    const filename = `linkedin-video-${new Date().getTime()}.mp4`;
-    chrome.downloads.download({ url, filename });
+    chrome.storage.local.get([CommonNames.OptionsStorageKey], (data) => {
+      const storedOptions = data[CommonNames.OptionsStorageKey] as Options;
+      const filename = `${storedOptions?.filename || defaultOptions.filename}.mp4`;
+      chrome.downloads.download({ url, filename });
+    });
   }
 
   static onMessage({ action, url }: Message): void {
@@ -19,7 +23,7 @@ class Processor {
   }
 
   static onNavigationCompleted = (): void => {
-    chrome.tabs.query({active: true, currentWindow: true}, Processor.tabsQueryCallback);
+    chrome.tabs.query({ active: true, currentWindow: true }, Processor.tabsQueryCallback);
   }
 
   static tabsQueryCallback = (tabs: chrome.tabs.Tab[]): void => {
