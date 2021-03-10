@@ -162,10 +162,7 @@ export default class App extends Vue {
   }
 
   onChangeOption(): void {
-    if (!this.areOptionsChanged) {
-      this.areOptionsChanged = true;
-    }
-
+    this.areOptionsChanged = true;
     this.validateOptions();
   }
 
