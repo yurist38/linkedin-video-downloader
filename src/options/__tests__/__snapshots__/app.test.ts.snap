@@ -32,9 +32,7 @@ exports[`options/app Should render correctly 1`] = `
         <div
           class="option-title"
         >
-          
-          Button's vertical position
-        
+          Button's vertical position:
         </div>
          
         <div>
@@ -66,9 +64,7 @@ exports[`options/app Should render correctly 1`] = `
         <div
           class="option-title"
         >
-          
-          Button's horizontal position
-        
+          Button's horizontal position:
         </div>
          
         <div>
@@ -94,6 +90,24 @@ exports[`options/app Should render correctly 1`] = `
         </div>
       </div>
        
+      <div
+        class="option"
+      >
+        <div
+          class="option-title"
+        >
+          Filename:
+        </div>
+         
+        <b-field-stub>
+          <b-input-stub
+            name="filename-input"
+            rounded=""
+            value="linkedin-video"
+          />
+        </b-field-stub>
+      </div>
+       
       <b-button-stub
         class="btn center"
         disabled="true"
@@ -112,9 +126,9 @@ exports[`options/app Should render correctly 1`] = `
       type="is-primary"
     >
       
-      Thank you for using LinkedIn Video Downloader!
-      How do you feel about it? Maybe you have an idea for improvement or want to report a bug?
-      Please consider sending us a feedback message...
+      Thank you for using LinkedIn Video Downloader! How do you feel about it?
+      Maybe you have an idea for improvement or want to report a bug? Please
+      consider sending us a feedback message...
     
     </b-notification-stub>
      

@@ -1,6 +1,7 @@
 import { chrome } from 'jest-chrome';
 import Processor from '../Processor';
-import { Actions } from '../../types';
+import { Actions, CommonNames } from '../../types';
+import { defaultOptions } from '../../constants';
 
 describe('background/Processor', () => {
   let instance: Processor; // eslint-disable-line
@@ -8,10 +9,15 @@ describe('background/Processor', () => {
   beforeAll(() => {
     chrome.webNavigation.onCompleted.addListener = jest.fn();
     chrome.runtime.onMessage.addListener = jest.fn();
+    chrome.storage.local.get = jest.fn();
   });
 
   beforeEach(() => {
     instance = new Processor();
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('constructor is initialized correctly', () => {
@@ -21,11 +27,26 @@ describe('background/Processor', () => {
     expect(chrome.runtime.onMessage.addListener).toHaveBeenCalledWith(Processor.onMessage);
   });
 
-  it('Processor.downloadVideo start downloading video using a correct filename', () => {
+  it('Processor.downloadVideo start downloading video using the default filename if it is not set', () => {
     const url = 'test-url';
     Processor.downloadVideo(url);
+    chrome.storage.local.get.mock.calls[0][1]({});
     expect(chrome.downloads.download).toHaveBeenCalledTimes(1);
     expect(chrome.downloads.download.mock.calls[0][0].url).toEqual(url);
+    expect(chrome.downloads.download.mock.calls[0][0].filename).toEqual(defaultOptions.filename + '.mp4');
+  });
+
+  it('Processor.downloadVideo start downloading video using the saved filename', () => {
+    const url = 'test-url';
+    Processor.downloadVideo(url);
+    chrome.storage.local.get.mock.calls[0][1]({
+      [CommonNames.OptionsStorageKey]: {
+        filename: 'test-filename'
+      }
+    });
+    expect(chrome.downloads.download).toHaveBeenCalledTimes(1);
+    expect(chrome.downloads.download.mock.calls[0][0].url).toEqual(url);
+    expect(chrome.downloads.download.mock.calls[0][0].filename).toEqual('test-filename.mp4');
   });
 
   it('Processor.onMessage trigger downloading when action is download and url is passed', () => {

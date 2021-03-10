@@ -7,7 +7,7 @@ import { defaultOptions } from '../../constants';
 describe('options/app', () => {
   let localVue: VueConstructor;
   let wrapper: Wrapper<App>;
-  const stubs = ['b-button', 'b-notification', 'b-message', 'b-radio'];
+  const stubs = ['b-button', 'b-notification', 'b-message', 'b-radio', 'b-field', 'b-input'];
 
   beforeAll(() => {
     chrome.storage.local.get = jest.fn();
@@ -38,13 +38,18 @@ describe('options/app', () => {
     expect(wrapper.vm.$data.options).toEqual(defaultOptions);
     expect(wrapper.vm.$data.areOptionsChanged).toEqual(false);
 
+    (chrome.storage.local.get as jest.Mock).mock.calls[0][1]();
+    expect(wrapper.vm.$data.options).toEqual(defaultOptions);
+
     (chrome.storage.local.get as jest.Mock).mock.calls[0][1]({});
     expect(wrapper.vm.$data.options).toEqual(defaultOptions);
 
     (chrome.storage.local.get as jest.Mock).mock.calls[0][1]({
-      [CommonNames.OptionsStorageKey]: 'test-value',
+      [CommonNames.OptionsStorageKey]: {
+        key: 'value'
+      },
     });
-    expect(wrapper.vm.$data.options).toEqual('test-value');
+    expect(wrapper.vm.$data.options.key).toEqual('value');
 
     // @ts-ignore
     wrapper.vm.saveChanges();
@@ -69,5 +74,20 @@ describe('options/app', () => {
       localVue,
       stubs,
     })).toThrowError('Appzi credentials are not provided...');
+  });
+
+  it('Should set form to invalid state when the filename is empty', () => {
+    process.env.APPZI_TOKEN = 'test-value';
+    process.env.APPZI_ID = 'test-value';
+
+    wrapper = mount(App, {
+      localVue,
+      stubs,
+    });
+
+    // @ts-ignore
+    wrapper.vm.onChangeOption();
+    expect(wrapper.vm.$data.areOptionsChanged).toEqual(true);
+    expect(wrapper.vm.$data.areOptionsValid).toEqual(true);
   });
 });
