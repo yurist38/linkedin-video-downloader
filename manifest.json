@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "LinkedIn Video Downloader",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "It's the simpliest way to download any video from LinkedIn website.",
   "icons": {
     "16": "assets/icons/icon16.png",
