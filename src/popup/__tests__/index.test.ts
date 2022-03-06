@@ -24,6 +24,10 @@ describe('popup/index', () => {
     document.body.appendChild(appEl);
   });
 
+  afterEach(() => {
+    (Sentry.init as jest.MockedFn<any>).mockReset();
+  });
+
   it('Should create an instance of Vue', () => {
     jest.isolateModules(() => {
       require('../index');
