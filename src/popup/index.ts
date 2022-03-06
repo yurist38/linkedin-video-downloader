@@ -1,7 +1,7 @@
 import { init, configureScope } from '@sentry/browser';
 import { createApp } from 'vue';
 import Equal from 'equal-vue';
-import Options from './options.vue';
+import Popup from './popup.vue';
 import 'equal-vue/dist/style.css';
 
 if (process.env.SENTRY_DSN) {
@@ -10,10 +10,10 @@ if (process.env.SENTRY_DSN) {
     release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
   });
   configureScope((scope) => {
-    scope.setTag('app', 'options');
+    scope.setTag('app', 'popup');
   });
 }
 
 // eslint-disable-next-line
 // @ts-ignore
-createApp(Options).use(Equal).mount('#app');
+createApp(Popup).use(Equal).mount('#popup');

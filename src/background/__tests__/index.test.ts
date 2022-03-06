@@ -1,13 +1,11 @@
-import { mocked } from 'ts-jest/utils';
+import Sentry from '@sentry/browser';
 import Processor from '../Processor';
-import { init, configureScope, Scope } from '@sentry/browser';
 
-jest.mock('../Processor');
-jest.mock('@sentry/browser');
-
-const ProcessorMocked = mocked(Processor, false);
-const SentryInitMocked = mocked(init, false);
-const SentryConfigureScopeMocked = mocked(configureScope, false);
+jest.mock('@sentry/browser', () => ({
+  init: jest.fn(),
+  configureScope: jest.fn(jest.fn()),
+}));
+jest.mock('../Processor', () => jest.fn());
 
 describe('background/index', () => {
   const dsn = 'test-value';
@@ -19,7 +17,7 @@ describe('background/index', () => {
   it('Processor is initialized', () => {
     jest.isolateModules(() => {
       require('../index');
-      expect(ProcessorMocked).toHaveBeenCalledTimes(1);
+      expect(Processor).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -27,17 +25,17 @@ describe('background/index', () => {
     process.env.SENTRY_DSN = dsn;
     jest.isolateModules(() => {
       require('../index');
-      expect(SentryInitMocked).toHaveBeenCalledTimes(1);
-      expect(SentryInitMocked).toHaveBeenCalledWith({
+      expect(Sentry.init).toHaveBeenCalledTimes(1);
+      expect(Sentry.init).toHaveBeenCalledWith({
         dsn,
         release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
         ignoreErrors: [],
       });
-      expect(SentryConfigureScopeMocked).toHaveBeenCalledTimes(1);
-      const cb = SentryConfigureScopeMocked.mock.calls[0][0];
+      expect(Sentry.configureScope).toHaveBeenCalledTimes(1);
+      const cb = Sentry.configureScope.mock.calls[0][0];
       const setTag = jest.fn();
       const scope = { setTag };
-      cb(scope as unknown as Scope);
+      cb(scope as unknown as Sentry.Scope);
       expect(setTag).toHaveBeenCalledTimes(1);
       expect(setTag).toHaveBeenCalledWith('app', 'background');
     });
@@ -47,8 +45,8 @@ describe('background/index', () => {
     process.env.SENTRY_DSN = '';
     jest.isolateModules(() => {
       require('../index');
-      expect(SentryInitMocked).toHaveBeenCalledTimes(0);
-      expect(SentryConfigureScopeMocked).toHaveBeenCalledTimes(0);
+      expect(Sentry.init).toHaveBeenCalledTimes(0);
+      expect(Sentry.configureScope).toHaveBeenCalledTimes(0);
     });
   });
 });
