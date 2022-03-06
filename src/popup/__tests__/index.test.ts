@@ -22,6 +22,7 @@ describe('popup/index', () => {
     const appEl = document.createElement('div');
     appEl.id = 'popup';
     document.body.appendChild(appEl);
+    jest.restoreAllMocks();
   });
 
   it('Should create an instance of Vue', () => {
