@@ -1,4 +1,4 @@
-import { shallowMount, mount, VueWrapper, config } from '@vue/test-utils';
+import { mount, VueWrapper, config } from '@vue/test-utils';
 import Popup from '../popup.vue';
 
 config.global.components = {

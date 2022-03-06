@@ -8,7 +8,7 @@ exports[`popup/popup Should render correctly 1`] = `
     LinkedIn Video Downloader
   </h1>
   <p>
-    The extension is running in the background. In order to use it just go to LinkedIn website and look for a download icon in the corner of every video (you can change the corner in the settings).
+    The extension is running in background. In order to use it just go to LinkedIn website and look for a download icon in the corner of every video (you can change the corner in the settings).
   </p>
   <div>
     it-divider

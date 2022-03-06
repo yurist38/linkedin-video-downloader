@@ -4,8 +4,6 @@ import { Actions, CommonNames } from '../../types';
 import { defaultOptions } from '../../constants';
 
 describe('background/Processor', () => {
-  let instance: Processor; // eslint-disable-line
-
   beforeAll(() => {
     chrome.webNavigation.onCompleted.addListener = jest.fn();
     chrome.runtime.onMessage.addListener = jest.fn();
@@ -13,7 +11,7 @@ describe('background/Processor', () => {
   });
 
   beforeEach(() => {
-    instance = new Processor();
+    new Processor();
   });
 
   afterEach(() => {
