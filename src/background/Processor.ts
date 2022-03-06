@@ -24,14 +24,14 @@ class Processor {
 
   static onNavigationCompleted = (): void => {
     chrome.tabs.query({ active: true, currentWindow: true }, Processor.tabsQueryCallback);
-  }
+  };
 
   static tabsQueryCallback = (tabs: chrome.tabs.Tab[]): void => {
     const message: Message = {
       action: Actions.AddButtons,
     };
     tabs[0]?.id && chrome.tabs.sendMessage(tabs[0].id, message);
-  }
+  };
 }
 
 export default Processor;

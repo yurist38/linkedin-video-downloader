@@ -1,11 +1,11 @@
-import { mocked } from 'ts-jest/utils';
 import { chrome } from 'jest-chrome';
-import { debounce } from 'ts-debounce';
+import TsDebounce from 'ts-debounce';
 import Page from '../Page';
 import { Actions, CommonNames } from '../../types';
 
-jest.mock('ts-debounce');
-const debounceMocked = mocked(debounce, false).mockReturnValue(jest.fn());
+jest.mock('ts-debounce', () => ({
+  debounce: jest.fn(() => jest.fn()),
+}));
 
 describe('content/Page', () => {
   let instance: Page;
@@ -22,9 +22,9 @@ describe('content/Page', () => {
 
   it('Properties and constructor are initialized properly', () => {
     instance.createDownloadButton = jest.fn();
-    expect(debounceMocked).toHaveBeenCalledTimes(1);
-    expect(debounceMocked.mock.calls[0][0]).toEqual(instance.observerCallback);
-    expect(debounceMocked.mock.calls[0][1]).toEqual(1000);
+    expect(TsDebounce.debounce).toHaveBeenCalledTimes(1);
+    expect(TsDebounce.debounce.mock.calls[0][0]).toEqual(instance.observerCallback);
+    expect(TsDebounce.debounce.mock.calls[0][1]).toEqual(1000);
     expect(instance.observer).toBeInstanceOf(MutationObserver);
     expect(instance.observer.observe).toHaveBeenCalledTimes(1);
     expect(instance.observer.observe).toHaveBeenCalledWith(window.document, {

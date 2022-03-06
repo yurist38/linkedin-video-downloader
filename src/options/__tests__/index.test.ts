@@ -1,40 +1,39 @@
 import Vue from 'vue';
-import { mocked } from 'ts-jest/utils';
-import { init, configureScope, Scope } from '@sentry/browser';
-import Buefy from 'buefy';
+import Sentry from '@sentry/browser';
 
-jest.mock('@sentry/browser');
-jest.mock('vue');
-jest.mock('../app.vue', () => jest.fn(() => 'app'));
-
-Vue.use = jest.fn();
-
-const SentryInitMocked = mocked(init, false);
-const SentryConfigureScopeMocked = mocked(configureScope, false);
+jest.mock('@sentry/browser', () => ({
+  init: jest.fn(),
+  configureScope: jest.fn(jest.fn()),
+}));
+jest.mock('equal-vue', () => jest.fn());
+jest.mock('vue', () => ({
+  createApp: jest.fn(() => ({
+    use: jest.fn(() => ({
+      mount: jest.fn(),
+    }))
+  })),
+}));
+jest.mock('../options.vue', () => 'options');
 
 describe('options/index', () => {
   const dsn = 'test-value';
 
   beforeAll(() => {
     const appEl = document.createElement('div');
-    appEl.id = 'app';
+    appEl.id = 'options';
     document.body.appendChild(appEl);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    (Sentry.init as jest.MockedFn<any>).mockReset();
+    (Sentry.configureScope as jest.MockedFn<any>).mockReset();
   });
 
   it('Should create an instance of Vue', () => {
     jest.isolateModules(() => {
       require('../index');
-      expect(Vue.use).toHaveBeenCalledTimes(1);
-      expect(Vue.use).toHaveBeenCalledWith(Buefy);
-      expect(Vue).toHaveBeenCalledTimes(1);
-      const renderFn = jest.fn();
-      (Vue as unknown as jest.Mock).mock.calls[0][0].render(renderFn);
-      expect(renderFn).toHaveBeenCalledTimes(1);
-      expect(renderFn.mock.calls[0][0]()).toEqual('app');
+      expect(Vue.createApp).toHaveBeenCalledTimes(1);
+      expect(Vue.createApp).toHaveBeenCalledWith('options');
     });
   });
 
@@ -42,8 +41,8 @@ describe('options/index', () => {
     process.env.SENTRY_DSN = '';
     jest.isolateModules(() => {
       require('../index');
-      expect(SentryInitMocked).toHaveBeenCalledTimes(0);
-      expect(SentryConfigureScopeMocked).toHaveBeenCalledTimes(0);
+      expect(Sentry.init).toHaveBeenCalledTimes(0);
+      expect(Sentry.configureScope).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -51,16 +50,16 @@ describe('options/index', () => {
     process.env.SENTRY_DSN = dsn;
     jest.isolateModules(() => {
       require('../index');
-      expect(SentryInitMocked).toHaveBeenCalledTimes(1);
-      expect(SentryInitMocked).toHaveBeenCalledWith({
+      expect(Sentry.init).toHaveBeenCalledTimes(1);
+      expect(Sentry.init).toHaveBeenCalledWith({
         dsn,
         release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
       });
-      expect(SentryConfigureScopeMocked).toHaveBeenCalledTimes(1);
-      const cb = SentryConfigureScopeMocked.mock.calls[0][0];
+      expect(Sentry.configureScope).toHaveBeenCalledTimes(1);
+      const cb = (Sentry.configureScope as jest.Mock).mock.calls[0][0];
       const setTag = jest.fn();
       const scope = { setTag };
-      cb(scope as unknown as Scope);
+      cb(scope as unknown as Sentry.Scope);
       expect(setTag).toHaveBeenCalledTimes(1);
       expect(setTag).toHaveBeenCalledWith('app', 'options');
     });

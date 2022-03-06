@@ -10,6 +10,7 @@ button.linkedin-video-downloader-btn {
   cursor: pointer;
   opacity: 0.5;
   transition: all 0.167s linear;
+  z-index: 99999;
 
   &.top {
     top: 10px;

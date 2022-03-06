@@ -1,36 +1,41 @@
-import { VueConstructor } from 'vue';
-import { shallowMount, mount, createLocalVue, Wrapper } from '@vue/test-utils';
-import App from '../app.vue';
+import { shallowMount, mount, VueWrapper, config } from '@vue/test-utils';
+import Options from '../options.vue';
 import { CommonNames } from '../../types';
 import { defaultOptions } from '../../constants';
 
-describe('options/app', () => {
-  let localVue: VueConstructor;
-  let wrapper: Wrapper<App>;
-  const stubs = ['b-button', 'b-notification', 'b-message', 'b-radio', 'b-field', 'b-input'];
+config.global.components = {
+  'it-button': {
+    template: '<div>it-button</div>',
+  },
+  'it-radio': {
+    template: '<div>it-radio</div>',
+  },
+  'it-divider': {
+    template: '<div>it-divider</div>',
+  },
+  'it-input': {
+    template: '<div>it-input</div>',
+  }
+};
+
+describe('options/options', () => {
+  let wrapper: VueWrapper;
 
   beforeAll(() => {
     chrome.storage.local.get = jest.fn();
     chrome.storage.local.set = jest.fn();
   });
 
-  beforeEach(() => {
-    localVue = createLocalVue();
-  });
-
   it('Should render correctly', () => {
     process.env.APPZI_TOKEN = 'test-value';
     process.env.APPZI_ID = 'test-value';
 
-    wrapper = mount(App, {
-      localVue,
-      stubs,
-    });
+    wrapper = mount(Options);
 
     expect(wrapper.element).toMatchSnapshot();
 
     const script = document.body.querySelector('script[src*="test-value"]') as HTMLScriptElement;
-    (script.onload as Function)();
+    script.onload && script.onload(new Event('test'));
     expect(wrapper.vm.$data.isAppziLoaded).toEqual(true);
     expect(chrome.storage.local.get).toHaveBeenCalledTimes(1);
     expect((chrome.storage.local.get as jest.Mock).mock.calls[0][0])
@@ -51,7 +56,6 @@ describe('options/app', () => {
     });
     expect(wrapper.vm.$data.options.key).toEqual('value');
 
-    // @ts-ignore
     wrapper.vm.saveChanges();
     (chrome.storage.local.set as jest.Mock).mock.calls[0][1]();
     expect(chrome.storage.local.set).toHaveBeenCalledTimes(1);
@@ -61,31 +65,21 @@ describe('options/app', () => {
   it('Should throw an error when appzi token is not provided', () => {
     process.env.APPZI_TOKEN = '';
 
-    expect(() => shallowMount(App, {
-      localVue,
-      stubs,
-    })).toThrowError('Appzi credentials are not provided...');
+    expect(() => shallowMount(Options)).toThrowError('Appzi credentials are not provided...');
   });
 
   it('Should throw an error when appzi id is not provided', () => {
     process.env.APPZI_ID = '';
 
-    expect(() => shallowMount(App, {
-      localVue,
-      stubs,
-    })).toThrowError('Appzi credentials are not provided...');
+    expect(() => shallowMount(Options)).toThrowError('Appzi credentials are not provided...');
   });
 
   it('Should set form to invalid state when the filename is empty', () => {
     process.env.APPZI_TOKEN = 'test-value';
     process.env.APPZI_ID = 'test-value';
 
-    wrapper = mount(App, {
-      localVue,
-      stubs,
-    });
+    wrapper = mount(Options);
 
-    // @ts-ignore
     wrapper.vm.onChangeOption();
     expect(wrapper.vm.$data.areOptionsChanged).toEqual(true);
     expect(wrapper.vm.$data.areOptionsValid).toEqual(true);

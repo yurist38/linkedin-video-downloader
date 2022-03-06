@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`popup/popup Should render correctly 1`] = `
+<section
+  class="content"
+>
+  <h1>
+    LinkedIn Video Downloader
+  </h1>
+  <p>
+    The extension is running in background. In order to use it just go to LinkedIn website and look for a download icon in the corner of every video (you can change the corner in the settings).
+  </p>
+  <div>
+    it-divider
+  </div>
+  <p>
+    <i>
+      This is a free 
+      <a
+        href="https://github.com/yurist38/linkedin-video-downloader"
+        target="_blank"
+      >
+        open source
+      </a>
+       project.
+    </i>
+  </p>
+  <p>
+    <i>
+      Please consider supporting it. Every donation is appreciated. Thank you!
+    </i>
+  </p>
+  <div
+    class="btn-container"
+  >
+    <div
+      id="settings-btn"
+      outlined=""
+      type="black"
+    >
+      it-button
+    </div>
+    <div
+      id="donate-btn"
+      outlined=""
+      type="primary"
+    >
+      it-button
+    </div>
+  </div>
+</section>
+`;

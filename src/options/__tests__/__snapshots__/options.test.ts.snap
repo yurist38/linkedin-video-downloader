@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`options/options Should render correctly 1`] = `
+<section
+  class="content"
+>
+  <div
+    class="centered"
+  >
+    <img />
+    <h1
+      class="title"
+    >
+      LinkedIn Video Downloader
+    </h1>
+  </div>
+  <div
+    class="option"
+  >
+    <div
+      class="option-title"
+    >
+      Button's vertical position:
+    </div>
+    <div>
+      <div
+        label="Top"
+        modelvalue="top"
+        name="button-position-vertical"
+        value="top"
+      >
+        it-radio
+      </div>
+      <div
+        label="Bottom"
+        modelvalue="top"
+        name="button-position-vertical"
+        value="bottom"
+      >
+        it-radio
+      </div>
+    </div>
+  </div>
+  <div
+    class="option"
+  >
+    <div
+      class="option-title"
+    >
+      Button's horizontal position:
+    </div>
+    <div>
+      <div
+        label="Left"
+        modelvalue="left"
+        name="button-position-horizontal"
+        value="left"
+      >
+        it-radio
+      </div>
+      <div
+        label="Right"
+        modelvalue="left"
+        name="button-position-horizontal"
+        value="right"
+      >
+        it-radio
+      </div>
+    </div>
+  </div>
+  <div
+    class="option"
+  >
+    <div
+      class="option-title"
+    >
+      Filename:
+    </div>
+    <div
+      modelvalue="linkedin-video"
+      name="filename-input"
+    >
+      it-input
+    </div>
+  </div>
+  <div
+    class="btn center"
+    disabled="true"
+    outlined=""
+    type="primary"
+  >
+    it-button
+  </div>
+  <div>
+    it-divider
+  </div>
+  <div
+    class="message"
+  >
+     Thank you for using LinkedIn Video Downloader! How do you feel about it? Maybe you have an idea for improvement or want to report a bug? Please consider sending us a feedback message... 
+  </div>
+  <div
+    class="centered"
+  >
+    <div
+      class="btn"
+      data-az-l="test-value"
+      disabled="true"
+      id="feedback-btn"
+      outlined=""
+      type="black"
+    >
+      it-button
+    </div>
+  </div>
+</section>
+`;
