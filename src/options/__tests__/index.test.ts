@@ -26,6 +26,7 @@ describe('options/index', () => {
 
   afterEach(() => {
     (Sentry.init as jest.MockedFn<any>).mockReset();
+    (Sentry.configureScope as jest.MockedFn<any>).mockReset();
   });
 
   it('Should create an instance of Vue', () => {
