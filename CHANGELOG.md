@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.19 (2022-03-06)
+
+
+### Bug Fixes
+
+* Migrate to Vue 3 ([#25](https://github.com/yurist38/linkedin-video-downloader/issues/25)) ([c426174](https://github.com/yurist38/linkedin-video-downloader/commit/c4261746adb19f0623e24e2ccb9cc5298a72be60))
+
 ### 0.0.18 (2021-08-12)
 
 ### 0.0.17 (2021-05-11)
