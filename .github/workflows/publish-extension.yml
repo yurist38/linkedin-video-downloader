@@ -31,7 +31,7 @@ jobs:
       - name: Run linter
         run: npm run lint
       - name: Run unit tests
-        run: npm t -- --ci
+        run: npm t -- --ci --maxWorkers=2
       - name: Configure git
         run: git config user.name $GIT_NAME && git config user.email $GIT_EMAIL
       - name: Bump version
