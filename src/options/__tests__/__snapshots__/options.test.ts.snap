@@ -91,27 +91,5 @@ exports[`options/options Should render correctly 1`] = `
   >
     it-button
   </div>
-  <div>
-    it-divider
-  </div>
-  <div
-    class="message"
-  >
-     Thank you for using LinkedIn Video Downloader! How do you feel about it? Maybe you have an idea for improvement or want to report a bug? Please consider sending us a feedback message... 
-  </div>
-  <div
-    class="centered"
-  >
-    <div
-      class="btn"
-      data-az-l="test-value"
-      disabled="true"
-      id="feedback-btn"
-      outlined=""
-      type="black"
-    >
-      it-button
-    </div>
-  </div>
 </section>
 `;

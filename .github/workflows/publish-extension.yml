@@ -38,9 +38,9 @@ jobs:
         run: npx standard-version
       - name: Push version update commit
         run: git push origin master --follow-tags
-      - name: Build production dist
-        run: npm run dist
-        env:
-          NODE_ENV: production
-      - name: Publish extension to Chrome Webstore
-        run: npx chrome-webstore-upload-cli upload --auto-publish --source dist --extension-id $EID --client-id $OCI --client-secret $OCS --refresh-token $ORT
+      # - name: Build production dist
+      #   run: npm run dist
+      #   env:
+      #     NODE_ENV: production
+      # - name: Publish extension to Chrome Webstore
+      #   run: npx chrome-webstore-upload-cli upload --auto-publish --source dist --extension-id $EID --client-id $OCI --client-secret $OCS --refresh-token $ORT

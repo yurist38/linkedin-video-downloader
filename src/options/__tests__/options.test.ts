@@ -27,16 +27,10 @@ describe('options/options', () => {
   });
 
   it('Should render correctly', () => {
-    process.env.APPZI_TOKEN = 'test-value';
-    process.env.APPZI_ID = 'test-value';
-
     wrapper = mount(Options);
 
     expect(wrapper.element).toMatchSnapshot();
 
-    const script = document.body.querySelector('script[src*="test-value"]') as HTMLScriptElement;
-    script.onload && script.onload(new Event('test'));
-    expect(wrapper.vm.$data.isAppziLoaded).toEqual(true);
     expect(chrome.storage.local.get).toHaveBeenCalledTimes(1);
     expect((chrome.storage.local.get as jest.Mock).mock.calls[0][0])
       .toEqual([CommonNames.OptionsStorageKey]);
@@ -60,18 +54,6 @@ describe('options/options', () => {
     (chrome.storage.local.set as jest.Mock).mock.calls[0][1]();
     expect(chrome.storage.local.set).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.$data.areOptionsChanged).toEqual(false);
-  });
-
-  it('Should throw an error when appzi token is not provided', () => {
-    process.env.APPZI_TOKEN = '';
-
-    expect(() => shallowMount(Options)).toThrowError('Appzi credentials are not provided...');
-  });
-
-  it('Should throw an error when appzi id is not provided', () => {
-    process.env.APPZI_ID = '';
-
-    expect(() => shallowMount(Options)).toThrowError('Appzi credentials are not provided...');
   });
 
   it('Should set form to invalid state when the filename is empty', () => {

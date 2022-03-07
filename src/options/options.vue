@@ -69,24 +69,6 @@
     >
       Save
     </it-button>
-    <it-divider />
-    <div class="message">
-      Thank you for using LinkedIn Video Downloader! How do you feel about it?
-      Maybe you have an idea for improvement or want to report a bug? Please
-      consider sending us a feedback message...
-    </div>
-    <div class="centered">
-      <it-button
-        outlined
-        class="btn"
-        type="black"
-        id="feedback-btn"
-        :data-az-l="appziId"
-        :disabled="!isAppziLoaded"
-      >
-        Send feedback
-      </it-button>
-    </div>
   </section>
 </template>
 
@@ -99,17 +81,13 @@ export default {
 
   data() {
     return {
-      appziToken: process.env.APPZI_TOKEN,
-      appziId: process.env.APPZI_ID,
       options: defaultOptions,
-      isAppziLoaded: false,
       areOptionsChanged: false,
       areOptionsValid: true,
     };
   },
 
   created(): void {
-    this.initAppziScript();
     chrome.storage.local.get([CommonNames.OptionsStorageKey], (data) => {
       if (!data || !data[CommonNames.OptionsStorageKey]) {
         return;
@@ -122,24 +100,6 @@ export default {
   },
 
   methods: {
-    getAppziScriptSrc(): string {
-      return `https://w.appzi.io/bootstrap/bundle.js?token=${this.appziToken}`;
-    },
-
-    initAppziScript(): void {
-      if (!this.appziId || !this.appziToken) {
-        throw new Error("Appzi credentials are not provided...");
-      }
-
-      const script = document.createElement("script");
-
-      script.src = this.getAppziScriptSrc();
-      script.async = true;
-      script.onload = () => (this.isAppziLoaded = true);
-
-      document.body.appendChild(script);
-    },
-
     validateOptions(): void {
       this.areOptionsValid = !!this.options.filename;
     },
