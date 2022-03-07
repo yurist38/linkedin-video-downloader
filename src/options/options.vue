@@ -59,6 +59,12 @@
               : 'danger'
         "
       />
+      <p class="filename-remark-title">Filename supports the following placeholders:</p>
+      <ul class="filename-remark-list">
+        <li><b>[DATE]</b> - current date (DD-MM-YYYY)</li>
+        <li><b>[TIME]</b> - current time (HH-MM-SS)</li>
+        <li><b>[TITLE]</b> - a title of the page where is the video downloaded from</li>
+      </ul>
     </div>
     <it-button
       outlined
@@ -138,10 +144,10 @@ html, body {
 
 .content {
   padding: 20px;
+  font-size: 14px;
 }
 
 .message {
-  font-size: 14px;
   margin: 0 0 10px 0;
 }
 
@@ -166,5 +172,14 @@ h1.title {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.filename-remark-title {
+  margin-top: 15px;
+}
+
+.filename-remark-list {
+  margin: 5px 0;
+  line-height: 20px;
 }
 </style>

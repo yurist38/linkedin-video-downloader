@@ -5,5 +5,5 @@ export const defaultOptions: Options = {
     horizontal: 'left',
     vertical: 'top',
   },
-  filename: 'linkedin-video',
+  filename: 'linkedin-video-[TITLE]-[DATE]-[TIME]',
 };

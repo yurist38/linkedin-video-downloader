@@ -6,6 +6,7 @@ export enum Actions {
 export interface Message {
   action: Actions;
   url?: string;
+  pageTitle?: string;
 }
 
 export interface Options {

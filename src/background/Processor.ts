@@ -7,18 +7,25 @@ class Processor {
     chrome.runtime.onMessage.addListener(Processor.onMessage);
   }
 
-  static downloadVideo(url: string) {
+  static downloadVideo(url: string, pageTitle?: string) {
     chrome.storage.local.get([CommonNames.OptionsStorageKey], (data) => {
       const storedOptions = data[CommonNames.OptionsStorageKey] as Options;
-      const filename = `${storedOptions?.filename || defaultOptions.filename}.mp4`;
+      const filenameRaw = `${storedOptions?.filename || defaultOptions.filename}.mp4`;
+      const date = new Date();
+      const filename = filenameRaw
+        .replace('[DATE]', date.toLocaleDateString('en-GB'))
+        .replace('[TIME]', date.toLocaleTimeString('en-GB'))
+        .replace('[TITLE]', pageTitle || '')
+        .replace(/[/:\s]/g, '-')
+        .replace(/[^a-zA-Z0-9-.]/g, '');
       chrome.downloads.download({ url, filename });
     });
   }
 
-  static onMessage({ action, url }: Message): void {
+  static onMessage({ action, url, pageTitle }: Message): void {
     switch (action) {
       case Actions.Download:
-        url && Processor.downloadVideo(url);
+        url && Processor.downloadVideo(url, pageTitle);
     }
   }
 

@@ -77,11 +77,38 @@ exports[`options/options Should render correctly 1`] = `
       Filename:
     </div>
     <div
-      modelvalue="linkedin-video"
+      modelvalue="linkedin-video-[TITLE]-[DATE]-[TIME]"
       name="filename-input"
     >
       it-input
     </div>
+    <p
+      class="filename-remark-title"
+    >
+      Filename supports the following placeholders:
+    </p>
+    <ul
+      class="filename-remark-list"
+    >
+      <li>
+        <b>
+          [DATE]
+        </b>
+         - current date (DD-MM-YYYY)
+      </li>
+      <li>
+        <b>
+          [TIME]
+        </b>
+         - current time (HH-MM-SS)
+      </li>
+      <li>
+        <b>
+          [TITLE]
+        </b>
+         - a title of the page where is the video downloaded from
+      </li>
+    </ul>
   </div>
   <div
     class="btn center"

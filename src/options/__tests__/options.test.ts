@@ -1,4 +1,4 @@
-import { shallowMount, mount, VueWrapper, config } from '@vue/test-utils';
+import { mount, VueWrapper, config } from '@vue/test-utils';
 import Options from '../options.vue';
 import { CommonNames } from '../../types';
 import { defaultOptions } from '../../constants';

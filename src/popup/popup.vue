@@ -4,8 +4,8 @@
     <p>The extension is running in background. In order to use it just go to LinkedIn website and look for a download
       icon in the corner of every video (you can change the corner in the settings).</p>
     <it-divider />
-    <p><i>This is a free <a href="https://github.com/yurist38/linkedin-video-downloader" target="_blank">open source</a> project.</i></p>
-    <p><i>Please consider supporting it. Every donation is appreciated. Thank you!</i></p>
+    <p><i>This is a free <a href="https://github.com/yurist38/linkedin-video-downloader" target="_blank">open source</a> project.
+    You can support it <a href="https://www.buymeacoffee.com/roomjs" target="_blank">here</a>. Every donation is appreciated. Thank you!</i></p>
 
     <div class="btn-container">
       <it-button
