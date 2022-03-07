@@ -22,12 +22,14 @@ exports[`popup/popup Should render correctly 1`] = `
       >
         open source
       </a>
-       project.
-    </i>
-  </p>
-  <p>
-    <i>
-      Please consider supporting it. Every donation is appreciated. Thank you!
+       project. You can support it 
+      <a
+        href="https://www.buymeacoffee.com/roomjs"
+        target="_blank"
+      >
+        here
+      </a>
+      . Every donation is appreciated. Thank you!
     </i>
   </p>
   <div

@@ -31,7 +31,14 @@ describe('background/Processor', () => {
     chrome.storage.local.get.mock.calls[0][1]({});
     expect(chrome.downloads.download).toHaveBeenCalledTimes(1);
     expect(chrome.downloads.download.mock.calls[0][0].url).toEqual(url);
-    expect(chrome.downloads.download.mock.calls[0][0].filename).toEqual(defaultOptions.filename + '.mp4');
+    const date = new Date();
+    const filename = defaultOptions.filename
+      .replace('[DATE]', date.toLocaleDateString('en-GB'))
+      .replace('[TIME]', date.toLocaleTimeString('en-GB'))
+      .replace('[TITLE]', '')
+      .replace(/[/:\s]/g, '-')
+      .replace(/[^a-zA-Z0-9-.]/g, '');
+    expect(chrome.downloads.download.mock.calls[0][0].filename).toEqual(filename + '.mp4');
   });
 
   it('Processor.downloadVideo start downloading video using the saved filename', () => {

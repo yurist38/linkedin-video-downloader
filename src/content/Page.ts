@@ -50,7 +50,13 @@ class Page {
 
   static onClickDownload(event: MouseEvent): void {
     const url = (event.currentTarget as HTMLElement).dataset['videoUrl'];
-    url && chrome.runtime.sendMessage({ action: Actions.Download, url });
+    if (url) {
+      chrome.runtime.sendMessage({
+        action: Actions.Download,
+        url,
+        pageTitle: document.title,
+      });
+    }
   }
 
   static isButtonAttached(videoEl: HTMLElement): boolean {
