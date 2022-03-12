@@ -3,8 +3,10 @@ import { defaultOptions } from '../constants';
 
 class Processor {
   public constructor() {
-    chrome.webNavigation.onCompleted.addListener(Processor.onNavigationCompleted);
     chrome.runtime.onMessage.addListener(Processor.onMessage);
+    chrome.webNavigation.onCompleted.addListener(Processor.onNavigationCompleted, {
+      url: [{ hostSuffix: '.linkedin.com' }],
+    });
   }
 
   static downloadVideo(url: string, pageTitle?: string) {
@@ -22,11 +24,12 @@ class Processor {
     });
   }
 
-  static onMessage({ action, url, pageTitle }: Message): void {
+  static onMessage({ action, url, pageTitle }: Message): boolean {
     switch (action) {
       case Actions.Download:
         url && Processor.downloadVideo(url, pageTitle);
     }
+    return true;
   }
 
   static onNavigationCompleted = (): void => {
@@ -37,7 +40,9 @@ class Processor {
     const message: Message = {
       action: Actions.AddButtons,
     };
-    tabs[0]?.id && chrome.tabs.sendMessage(tabs[0].id, message);
+    if (tabs[0]?.id) {
+      chrome.tabs.sendMessage(tabs[0].id, message);
+    }
   };
 }
 

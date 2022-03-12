@@ -5,15 +5,15 @@ import { debounce } from 'ts-debounce';
 class Page {
   public options = defaultOptions;
   public buttonElement = this.createDownloadButton();
-  public observerCallbackDebounced = debounce(this.observerCallback, 1000);
+  public observerCallbackDebounced = debounce(this.processAllVideos, 1000);
   public observer = new MutationObserver(this.observerCallbackDebounced.bind(this));
 
   public constructor() {
+    chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
     this.observer.observe(window.document, {
       childList: true,
       subtree: true,
     });
-    chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
     chrome.storage.local.get([CommonNames.OptionsStorageKey], (data) => {
       if (!data || !data[CommonNames.OptionsStorageKey]) {
         return;
@@ -23,10 +23,6 @@ class Page {
       });
       this.buttonElement = this.createDownloadButton();
     });
-  }
-
-  public observerCallback(): void {
-    this.processAllVideos();
   }
 
   public getButtonClasses(): string[] {
@@ -83,11 +79,12 @@ class Page {
     videoEl.parentElement?.appendChild(button);
   }
 
-  public onMessage(message: Message): void {
+  public onMessage(message: Message): boolean {
     switch (message.action) {
       case Actions.AddButtons:
         this.processAllVideos();
     }
+    return true;
   }
 }
 

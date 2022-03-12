@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "LinkedIn Video Downloader",
   "version": "0.0.21",
   "description": "It's the simpliest way to download any video from LinkedIn website.",
@@ -8,7 +8,7 @@
     "48": "assets/icons/icon48.png",
     "128": "assets/icons/icon128.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "assets/icons/icon16.png",
       "24": "assets/icons/icon24.png",
@@ -20,7 +20,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.linkedin.com/*"
+        "*://linkedin.com/*",
+        "*://*.linkedin.com/*"
       ],
       "js": [
         "content/index.js"
@@ -31,23 +32,29 @@
     }
   ],
   "background": {
-    "scripts": [
-      "background/index.js"
-    ],
-    "persistent": false
+    "service_worker": "background/index.js"
   },
   "options_page": "options/index.html",
-  "web_accessible_resources": [
-    "assets/icons/*.png"
-  ],
+  "web_accessible_resources": [{
+    "resources": [
+      "assets/icons/*.png"
+    ],
+    "matches": [
+      "*://*/*"
+    ],
+    "extension_ids": []
+  }],
   "permissions": [
-    "https://*.linkedin.com/*",
-    "https://fonts.googleapis.com/*",
-    "https://w.appzi.io/*",
-    "https://cdnjs.buymeacoffee.com/*",
     "webNavigation",
     "downloads",
     "storage"
   ],
-  "content_security_policy": "script-src 'self' https://w.appzi.io https://cdnjs.buymeacoffee.com; object-src 'self'"
+  "host_permissions": [
+    "https://*.linkedin.com/*",
+    "https://fonts.googleapis.com/*",
+    "https://cdnjs.buymeacoffee.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }
