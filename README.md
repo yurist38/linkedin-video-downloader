@@ -2,7 +2,13 @@
 
 Google Chrome extension for downloading videos from LinkedIn.
 
-It's available on [Chrome Web Store](https://chrome.google.com/webstore/detail/linkedin-video-downloader/jphfcmjmlcoecehbanbbfgonpapcnjdi)
+[Chrome Web Store](https://chrome.google.com/webstore/detail/linkedin-video-downloader/jphfcmjmlcoecehbanbbfgonpapcnjdi)
+
+IMPORTANT: unfortunately, this extension got blocked on Chrome Web Store. You can download the built extension file from [here](https://raw.githubusercontent.com/yurist38/linkedin-video-downloader/master/dist/linkedin-video-dwonloader.crx) and install it manually by dropping it to the Extensions page open in your Google Chrome. Sadly, this approach won't work right away either, because Chrome currently doesn't allow to enable extensions that are not whitelisted on the Web Store. Although, there are some tricks to hack it, if you want please try them on your own risk.
+
+## Download extension
+
+* [linkedin-video-dwonloader.crx](https://raw.githubusercontent.com/yurist38/linkedin-video-downloader/master/dist/linkedin-video-dwonloader.crx)
 
 ## Preview
 
@@ -12,12 +18,8 @@ It's available on [Chrome Web Store](https://chrome.google.com/webstore/detail/l
 
 1. Install dependencies with `npm ci`
 2. Create `.env` configuration file based on `.env.example`
-3. Make a build with `npm run dist` command
-4. Install the extenstion using development mode from the `./dist` folder directly
-
-## Production
-
-Production build and deployment are done automatically via CI (GitHub Actions)
+3. Make a build with `npm run build` command
+4. Install the extenstion using development mode from the `./build` folder directly
 
 ## Contribution
 

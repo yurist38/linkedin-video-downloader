@@ -1,7 +1,9 @@
 node_modules
-dist
+build
 .cache
-.env
+.env.development
+.env.production
 coverage
 .parcel-cache
 .DS_Store
+key.pem

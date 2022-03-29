@@ -28,7 +28,7 @@ describe('background/index', () => {
       expect(Sentry.init).toHaveBeenCalledTimes(1);
       expect(Sentry.init).toHaveBeenCalledWith({
         dsn,
-        release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
+        release: `linkedin-video-downloader-ext@${process.env.APP_VERSION}`,
         ignoreErrors: [],
       });
       expect(Sentry.configureScope).toHaveBeenCalledTimes(1);

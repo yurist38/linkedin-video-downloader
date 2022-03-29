@@ -53,7 +53,7 @@ describe('popup/index', () => {
       expect(Sentry.init).toHaveBeenCalledTimes(1);
       expect(Sentry.init).toHaveBeenCalledWith({
         dsn,
-        release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
+        release: `linkedin-video-downloader-ext@${process.env.APP_VERSION}`,
       });
       expect(Sentry.configureScope).toHaveBeenCalledTimes(1);
       const cb = (Sentry.configureScope as jest.Mock).mock.calls[0][0];
