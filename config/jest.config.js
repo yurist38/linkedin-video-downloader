@@ -3,7 +3,7 @@ const config = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['ts', 'js', 'vue'],
   rootDir: '../src',
-  testPathIgnorePatterns: ['node_modules', '.cache', 'dist', 'assets'],
+  testPathIgnorePatterns: ['node_modules', '.cache', 'build', 'assets'],
   transform: {
     '^.+\\.ts$': ['babel-jest', { configFile: './config/babel.jest.config.js' }],
     '^.*\\.vue$': '@vue/vue3-jest',

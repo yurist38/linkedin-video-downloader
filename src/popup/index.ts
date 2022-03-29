@@ -7,7 +7,7 @@ import 'equal-vue/dist/style.css';
 if (process.env.SENTRY_DSN) {
   init({
     dsn: process.env.SENTRY_DSN,
-    release: `linkedin-video-downloader-ext@${process.env.npm_package_version}`,
+    release: `linkedin-video-downloader-ext@${process.env.APP_VERSION}`,
   });
   configureScope((scope) => {
     scope.setTag('app', 'popup');
