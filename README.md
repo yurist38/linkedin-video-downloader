@@ -4,7 +4,7 @@ Google Chrome extension for downloading videos from LinkedIn.
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/linkedin-video-downloader/jphfcmjmlcoecehbanbbfgonpapcnjdi)
 
-IMPORTANT: unfortunately, this extension got blocked on Chrome Web Store. You can download the built extension file from [here](https://raw.githubusercontent.com/yurist38/linkedin-video-downloader/master/dist/linkedin-video-downloader.crx) and install it manually by dropping it to the Extensions page open in your Google Chrome. Sadly, this approach won't work right away either, because Chrome currently doesn't allow to enable extensions that are not whitelisted on the Web Store. Although, there are some tricks to hack it, if you want please try them on your own risk.
+IMPORTANT: unfortunately, this extension got blocked on Chrome Web Store. You can download the built extension file from [here](https://raw.githubusercontent.com/yurist38/linkedin-video-downloader/master/dist/linkedin-video-downloader.crx) and install it manually by dropping it to the Extensions page open in your Google Chrome. Sadly, this approach won't work right away either, because Chrome currently doesn't allow to enable extensions that are not whitelisted on the Web Store. Although, there are some tricks to hack it, if you want please try them on your own risk. Another option is to unpack the CRX file or build it yourself as described below in the `development` section. Then you can install it to Chrome as unpacked (you will need to activate the development mode).
 
 ## Download extension
 
