@@ -33,7 +33,7 @@
     "url": "git://github.com/yurist38/linkedin-video-downloader"
   },
   "devDependencies": {
-    "@babel/core": "7.17.8",
+    "@babel/core": "7.29.6",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
     "@parcel/transformer-sass": "2.4.0",
