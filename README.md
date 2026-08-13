@@ -1,3 +1,5 @@
+
+
 # linkedin-video-downloader
 
 Google Chrome extension for downloading videos from LinkedIn.
@@ -19,7 +21,7 @@ IMPORTANT: unfortunately, this extension got blocked on Chrome Web Store. You ca
 1. Install dependencies with `npm ci`
 2. Create `.env` configuration file based on `.env.example`
 3. Make a build with `npm run build` command
-4. Install the extenstion using development mode from the `./build` folder directly
+4. Install the extension using development mode from the `./build` folder directly
 
 ## Contribution
 
