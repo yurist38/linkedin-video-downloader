@@ -68,7 +68,7 @@
     "@sentry/browser": "8.33.0",
     "equal-vue": "0.731.0",
     "ts-debounce": "4.0.0",
-    "vue": "3.2.31",
+    "vue": "3.5.43",
     "vue-hot-reload-api": "2.3.4",
     "vue-property-decorator": "9.1.2"
   }
